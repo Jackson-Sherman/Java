@@ -1,14 +1,14 @@
 public class LinkedList<T> {
     public static void main (String[] args) {
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 4; i++) {
             LinkedList<Integer> l = new LinkedList<>();
             l.add(8);
             l.add(4);
             l.add(2);
             l.add(1);
             System.out.print(l);System.out.println(" - " + l.size());
-            System.out.println("l.insert(" + i + ", 9)");
-            l.insert(i, 9);
+            System.out.println("l.remove(" + i + ")");
+            l.remove(i);
             System.out.print(l);System.out.println(" - " + l.size());
             System.out.println();
         }
@@ -55,25 +55,35 @@ public class LinkedList<T> {
                 index--;
                 node = node.getNext();
             }
-            node.setData(value);
+            LinkedList.Node<T> next = node.getNext();
+            node = new LinkedList.Node<>(value, next);
         }
     }
 
     public T remove (int index) {
+        T output = null;
         if (index < 0) index += this.length;
-        if (0 <= index && index < this.length) {
-            LinkedList.Node<T> node = this.head;
-            while (index > 0) {
-                index--;
-                node = node.getNext();
+        if (index < this.length) {
+            if (index == 0) {
+                output = this.head.getData();
+                this.head = this.head.getNext();
+                this.length--;
             }
-            T current = node.getData();
-            node.setData(node.getNext().getData());
-            node.setNext(node.getNext().getNext());
-            this.length--;
-            return current;
+            else if (0 < index) {
+
+                LinkedList.Node<T> node = this.head;
+                while (index > 1) {
+                    index--;
+                    node = node.getNext();
+                }
+                LinkedList.Node<T> toBeRemoved = node.getNext();
+                LinkedList.Node<T> removedNext = toBeRemoved.getNext();
+                output = toBeRemoved.getData();
+                node.setNext(removedNext);
+                this.length--;
+            }
         }
-        return null;
+        return output;
     }
 
     public int size () { return this.length; }
@@ -142,6 +152,8 @@ public class LinkedList<T> {
         public boolean isFinal () {return this.next==null;}
 
         public String toString () {return this.getData().toString();}
+
+        public LinkedList.Node<T> clone () { return new LinkedList.Node<T>(this.getData(), this.getNext()); }
     }
 }
 
