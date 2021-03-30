@@ -1,3 +1,5 @@
 public interface Function {
-    String algo();
+    double valueAt(Point p);
+    BoundingBox bounds ();
+    String name ();
 }
