@@ -68,7 +68,7 @@ public class Matrix
         
         public Matrix.Integer multiply (Matrix.Integer other)
         {
-            Matrix.Integer output = new Matrix.Integer(this.rows, other.cols);
+            Matrix.Integer output = new Integer(this.rows, other.cols);
             
             if (this.cols == other.rows)
             {
@@ -91,7 +91,7 @@ public class Matrix
             }
             else
             {
-                output = new Matrix.Integer();
+                output = new Integer();
             }
             return output;
         }
@@ -251,7 +251,7 @@ public class Matrix
         
         public Matrix.Boolean multiply (Matrix.Boolean other)
         {
-            Matrix.Boolean output = new Matrix.Boolean(this.rows, other.cols);
+            Matrix.Boolean output = new Boolean(this.rows, other.cols);
             
             if (this.cols == other.rows)
             {
@@ -274,7 +274,7 @@ public class Matrix
             }
             else
             {
-                output = new Matrix.Boolean();
+                output = new Boolean();
             }
             return output;
         }
